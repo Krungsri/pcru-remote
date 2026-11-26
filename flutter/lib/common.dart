@@ -3737,6 +3737,9 @@ Color? disabledTextColor(BuildContext context, bool enabled) {
 }
 
 Widget loadPowered(BuildContext context) {
+  // PCRU build: no "Powered by" link on the home page
+  return SizedBox.shrink();
+  // ignore: dead_code
   if (bind.mainGetBuildinOption(key: "hide-powered-by-me") == 'Y') {
     return SizedBox.shrink();
   }
