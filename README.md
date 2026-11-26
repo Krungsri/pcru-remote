@@ -1,3 +1,28 @@
+# PCRU Remote
+
+Fork of [RustDesk](https://github.com/rustdesk/rustdesk) 1.4.9 for Phetchabun Rajabhat University (PCRU), licensed under AGPL-3.0 like upstream. The app is renamed **PCRU Remote** and comes pre-configured with the university's rendezvous/relay server (`172.16.10.17`) and its public key.
+
+## Build
+
+Run the **PCRU Remote - Windows x64 build** workflow (Actions tab, manual trigger) on branch `pcru-1.4.9`. It applies `pcru/apply-branding.py`, builds, and publishes these files to the `pcru-1.4.9` release:
+
+- `pcru-remote-1.4.9-x86_64.msi`: installer, suitable for GPO / Intune
+- `pcru-remote-1.4.9-x86_64.exe`: self-extracting portable package
+
+## Install / uninstall
+
+- Install: `msiexec /i pcru-remote-1.4.9-x86_64.msi /qn` (or double-click)
+- Uninstall: Start Menu > PCRU Remote > Uninstall, or `msiexec /x <ProductCode>` (see `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\PCRU Remote`)
+- Installs to `C:\Program Files\PCRU Remote` and registers the Windows service `PCRU Remote`
+
+## Rules for changing the app name
+
+The app name is `APP_NAME` in `pcru/apply-branding.py`. The executable and the MSI (`--app-name` in the workflow) **must use the same name**. If they differ, the app does not detect its own install and shows the "Install" banner. The name contains a space, so quote it in scripts.
+
+Only the public key belongs in this repository. Never commit the server's private key.
+
+---
+
 <p align="center">
   <img src="res/logo-header.svg" alt="RustDesk - Your remote desktop"><br>
   <a href="#raw-steps-to-build">Build</a> •
